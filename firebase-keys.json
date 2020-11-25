@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "englishschoolapp-978ee",
+  "private_key_id": "2caf40e67377ac0a848963151ebda51ffed63b4a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCnFdyax5o4hgYN\nUMIVHTdf4rrYWv7WCuOQR3nz2XiCKpby/Pj0VCGlEV/XFIu2WEm9M3Rv8PKia6zx\nY5iA37/CZdjye+LXDhBsfb+aTHEABNtp9kgxBzAOWuyVGV6r3MLq/F9RwILzk8xQ\nBp3Tk+rzAOxrDSi8Q9GZUvFmSesqzU+sCN8kiZm39ZM8FymUsIirgB3mqXZQaQ8X\nOtsaMx7xeCB6lxBZq51HyACoWBsetUd0jaCv9NvFIvNgiyTtyUIgOjKME4KurI0+\nC4lrGk0VKzb5WsM/0TUw9iqNj2IjpGcpqiyYihRVJ5Upzcsrra35hp9MYGEdK0rv\n6J5VdhRlAgMBAAECggEAN8PLIfl2VmEcyfrnG8bpgV4ZwDX2kZeGxdOlNyag2si+\nIpEdweYGaKI4237m9k/XJId02BuRz3WifdogvvpudMIrOxrv5ZizEJKTjTrwB/KX\nDHF/PKXKezALf+O8vh1rDKR4Z7+ZtRPh/9+Fc2UN6FapkT0OGG+GF+cf3GTVUS40\nRJnYYyVd6zFTyx7wA+tTLjB1w9Cke4Od4S+e9WZkGYL4KraMT7jpftLsoWWog0lG\nHZo5axiIkyXY2jNiquh9ZFcky8LwPZcOUAIw38Vjjfj9QKlF/YwfP39YO0gYDQ0c\niAyDDscpFL1v0h3Ywr8UsLLf7Pq2iMxntmHqVTzl7QKBgQDinZVvMuhLeDA7xjLg\ngZw74TEGD6ACOV9LVRaZ6r4uN2Xi0d06UAL/TmizczaxdNYeIbKp4s5MOLE9bQsq\n/NUZvORnFArroWhcodPJQJ/oxaRfGCd8Z7iLNrEpYEwhioh840guamsBeEcZfDN2\nyVGbivITIhTMCogFwNtBQMBdUwKBgQC8wDJ4CwfO0mgPvsx0ZHbkhpIiPdbmlnIo\nuv8RzsE+fSbI9oN4lyUS+Dtpev/kzR1f8oQt4FV8UqIwO7XZ3nitha4Nce1d3zg6\nx7oiPssEMZrpsnjZVSPI/FuMrid8mjgRZjeKn7eW1mMIqzsYoPRAyDbKsHYquZVT\nLCdrfJRYZwKBgASk1A4eTfJV+S8QZbSCE3CKsdV89nt1L4W8raTj0Zfi3LykLlNm\nllkjAzRCNSm3yjd920pt8mpPcxpeJK9x1PAdFdUi7QJdIWVcj5l9MIm1myOzvANp\noLeBnGnLpmO9kgR1J+KDncO+8j4MdIWHpJt6YnGP7jssMBNmG1gf+pEvAoGBAJYN\n4dGHS2TD5xClaZsah150EVcBfIgCkK0KxF7e1Mgd7KiVOb2zwziKeYkIzMiTvEeb\n4DMshil49BGOVqrm719byBxONxuKqwQn5jT1YKZr3TDuvp5gzjspTIrRpPitDeff\nMEaXZPeYZlDs9+VDiAq8YLrQgJDEyw69KnWMK87/AoGBAJhuTriKtmBdn3ZpeNd5\neB/iPAP+KGPSyCgOkykEVluJJV7I8VbCw5zRmKjJ/bAmKX2iKdxsOPtFfiAx1bmZ\nILW1JoJvxRvjtucKAA1kySKcQ83Uj+z6mWQt4lg1O/DKrU32t1mK1X8TnguXT7sy\nSXKiI/UtuOJcFN+74YYPKwOX\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-ty0xp@englishschoolapp-978ee.iam.gserviceaccount.com",
+  "client_id": "108927010904261010259",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ty0xp%40englishschoolapp-978ee.iam.gserviceaccount.com"
+}
