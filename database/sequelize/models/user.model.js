@@ -1,17 +1,17 @@
 module.exports = (sequelize, Sequelize) => {
-    const User = sequelize.define('User', {
+    return sequelize.define('User', {
         name: {
             type: Sequelize.STRING,
+            unique: true
         },
         password: {
             type: Sequelize.STRING,
-            get() { return undefined }
+            get () { return undefined }
         },
-        // role: {
-        //     type: Sequelize.ENUM,
-        //     values: ['admin', 'owner', 'operator']
-        // }
+        role: {
+            type: Sequelize.ENUM,
+            values: ['admin', 'user'],
+            defaultValue: 'user',
+        }
     });
-
-    return User
 }

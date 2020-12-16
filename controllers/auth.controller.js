@@ -19,6 +19,9 @@ async function login (req, res) {
     });
 }
 
+// try catch blocks are used because for some 
+// reason invalid jsonwebtokens throw an error
+
 async function isLogged (req, res, next) {
     try {
         jwt.verify(req.headers.auth, process.env.JWT_PRIVATE_KEY);
@@ -27,8 +30,18 @@ async function isLogged (req, res, next) {
     } catch { return res.sendStatus(401); }
 }
 
-async function isAdmin (req, res) {
+async function isAdmin (req, res, next) {
+    try {
+        const token = jwt.verify(req.headers.auth, process.env.JWT_PRIVATE_KEY);
+        const user = await global.db.findOne('user', { id: token.id });
 
+        console.log(user);
+
+        if (user.role !== 'admin') return res.sendStatus(403);
+
+        next();
+
+    } catch { return res.sendStatus(401); }
 }
 
 module.exports = { login, isLogged, isAdmin };

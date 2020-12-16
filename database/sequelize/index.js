@@ -19,9 +19,10 @@ class DatabaseInterface {
 
         this.models = {
             'user': require('./models/user.model')(this.sequelize, Sequelize),
+            'example': require('./models/example.model')(this.sequelize, Sequelize)
         }
 
-        this.sync();
+        // this.sync();
     }
 
     async sync () {
