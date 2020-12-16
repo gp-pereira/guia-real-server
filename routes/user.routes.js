@@ -1,31 +1,29 @@
-module.exports = firebase => {
-    const userController = require('../controllers/user.controller')(firebase);
-    const router = require('express').Router();
+const userController = require('../controllers/user.controller');
+const router = require('express').Router();
         
-    router.get(
-        '/getAll',
-        userController.getAllUsers
-    );
+router.get(
+    '/getAll',
+    userController.getAll
+);
 
-    router.get(
-        '/getOne',
-        userController.getOneUser
-    );
+router.get(
+    '/getOne',
+    userController.getOne
+);
 
-    router.post(
-        '/create',
-        userController.createUser
-    );
+router.post(
+    '/create',
+    userController.create
+);
 
-    router.post(
-        '/edit',
-        userController.editUser
-    );
+router.post(
+    '/edit',
+    userController.edit
+);
 
-    router.post(
-        '/delete',
-        userController.deleteUser
-    );
+router.post(
+    '/destroy',
+    userController.destroy
+);
 
-    return router;
-}
+module.exports = router;

@@ -3,20 +3,16 @@ require('dotenv/config');
 const express = require('express');
 const app = express();
 
-// firebase setup
-const firebase = require("firebase-admin");
-firebase.initializeApp({
-    credential: firebase.credential.applicationDefault(),
-    databaseURL: process.env.DATABASE_URL
-});
-
-// middleware
+// general middleware
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 app.use(require('cors')());
 
+// database setup
+global.db = require('./database');
+
 // routes
-app.use('/', require('./routes')(firebase));
+app.use('/', require('./routes'));
 
 // server initialization
 const http = require('http').Server(app);

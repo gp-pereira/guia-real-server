@@ -1,45 +1,47 @@
-module.exports = firebase => {
-    async function getAllUsers (req, res) {
-        return await firebase.auth().listUsers()
-            .then(users => res.status(200).send({ users })) 
-            .catch(err => res.sendStatus(500)); 
-    }
-
-    async function getOneUser (req, res) {
-        return await firebase.auth().getUser(req.body.uid)
-            .then(user => res.status(200).send({ user })) 
-            .catch(err => res.sendStatus(500)); 
-    }
-
-    async function createUser (req, res) {
-        return await firebase.auth().createUser({
-            email: req.body.email,
-            password: req.body.password
-        })
-            .then(() => res.sendStatus(200)) 
-            .catch(err => res.status(400).send({ message: err.errorInfo.code })); 
-    }
-
-    async function editUser (req, res) {
-        return await firebase.auth().updateUser(req.body.uid, {
-            email: req.body.email,
-            password: req.body.password
-        })
-            .then(() => res.sendStatus(200)) 
-            .catch(err => res.status(400).send({ message: err.errorInfo.code })); 
-    }
-    
-    async function deleteUser (req, res) {
-        return await firebase.auth().deleteUser(req.body.uid)
-            .then(() => res.sendStatus(200)) 
-            .catch(err => res.status(400).send({ message: err.errorInfo.code })); 
-    }
-
-    return {
-        getAllUsers,
-        getOneUser,
-        createUser,
-        editUser,
-        deleteUser,
-    };
+async function create (req, res) {
+    return await global.db.create('user', {
+        name: req.body.name,
+        password: require('bcrypt').hashSync(req.body.password, 10)
+    })
+        .then(() => res.sendStatus(200)) 
+        .catch(err => res.status(500))
 }
+
+async function getAll (req, res) {
+    return await global.db.findAll('user')
+        .then(users => res.status(200).send(users)) 
+        .catch(err => res.sendStatus(500)); 
+}
+
+async function getOne (req, res) {
+    return global.db.findOne('user', { id: req.body.id })
+        .then(user => res.status(200).send(user)) 
+        .catch(err => res.sendStatus(500)); 
+}
+
+async function edit (req, res) {
+    const props = {}
+
+    for (var prop in req.body) {
+        if (prop === 'id') continue;
+        props[prop] = req.body[prop];
+    }
+
+    return await global.db.update('user', { id: req.body.id }, props)
+        .then(() => res.sendStatus(200)) 
+        .catch(err => res.status(500).send());
+}
+
+async function destroy (req, res) {
+    return await global.db.destroy('user', req.body.id)
+        .then(() => res.sendStatus(200)) 
+        .catch(err => res.status(500));
+}
+                    
+module.exports = {
+    getAll,
+    getOne,
+    create,
+    edit,
+    destroy,
+};

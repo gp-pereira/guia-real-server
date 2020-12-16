@@ -1,7 +1,7 @@
-module.exports = firebase => {
-    const router = require('express').Router();
+const router = require('express').Router();
 
-    router.use('/user', require('./user.routes')(firebase));
+router.use('/auth', require('./auth.routes'));
+router.use('/user', require('./user.routes'));
 
-    return router;
-}
+module.exports = router;
+
