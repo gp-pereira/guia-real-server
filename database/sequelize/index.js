@@ -45,7 +45,7 @@ class DatabaseInterface {
         this.models.message.belongsTo(this.models.company);
 
         // uncomment the next line to sync the db
-        // await this.sequelize.sync({ alter: true }); console.log('Sync done.');
+        await this.sequelize.sync({ alter: true }); console.log('Sync done.');
     }
 
     async close () {

@@ -22,7 +22,7 @@ async function login (req, res) {
 // try catch blocks were used because for some 
 // reason invalid jsonwebtokens throw an error
 
-async function isLogged (req, res, next) {
+function isLogged (req, res, next) {
     try {
         jwt.verify(req.headers.auth, process.env.JWT_PRIVATE_KEY);
         next();

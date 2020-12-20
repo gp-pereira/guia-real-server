@@ -4,5 +4,8 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             unique: true,
         },
+        state: {
+            type: Sequelize.STRING
+        }
     });
 }
