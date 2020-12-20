@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 async function login (req, res) {
-    const user = await global.db.findOne('user', { name: req.body.name });
+    const user = await global.db.findOne('user', { email: req.body.email });
 
     if (!user) return res.sendStatus(404);
 
@@ -14,12 +14,12 @@ async function login (req, res) {
     )) return res.sendStatus(401);
 
     return res.status(200).send({
-        name: user.name, 
-        jwt: jwt.sign({ id: user.id }, process.env.JWT_PRIVATE_KEY )
+        user, 
+        token: jwt.sign({ id: user.id }, process.env.JWT_PRIVATE_KEY )
     });
 }
 
-// try catch blocks are used because for some 
+// try catch blocks were used because for some 
 // reason invalid jsonwebtokens throw an error
 
 async function isLogged (req, res, next) {

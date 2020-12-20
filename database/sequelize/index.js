@@ -18,15 +18,34 @@ class DatabaseInterface {
         );
 
         this.models = {
+            'ad': require('./models/ad.model')(this.sequelize, Sequelize),
+            'city': require('./models/city.model')(this.sequelize, Sequelize),
+            'live': require('./models/live.model')(this.sequelize, Sequelize),
             'user': require('./models/user.model')(this.sequelize, Sequelize),
-            'example': require('./models/example.model')(this.sequelize, Sequelize)
-        }
+            'news': require('./models/news.model')(this.sequelize, Sequelize),
+            'company': require('./models/company.model')(this.sequelize, Sequelize),
+            'message': require('./models/message.model')(this.sequelize, Sequelize),
+            'partner': require('./models/partner.model')(this.sequelize, Sequelize),
+        };
 
-        // this.sync();
+        this.init();
     }
 
-    async sync () {
-        return await this.sequelize.sync({ alter: true });
+    async init () {
+        this.models.city.hasMany(this.models.company);
+        this.models.company.belongsTo(this.models.city);
+
+        this.models.city.hasMany(this.models.partner);
+        this.models.partner.belongsTo(this.models.city);
+
+        this.models.company.hasMany(this.models.user);
+        this.models.user.belongsTo(this.models.company);
+
+        this.models.company.hasMany(this.models.message);
+        this.models.message.belongsTo(this.models.company);
+
+        // uncomment the next line to sync the db
+        // await this.sequelize.sync({ alter: true }); console.log('Sync done.');
     }
 
     async close () {

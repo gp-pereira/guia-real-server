@@ -2,6 +2,9 @@ module.exports = (sequelize, Sequelize) => {
     return sequelize.define('User', {
         name: {
             type: Sequelize.STRING,
+        },
+        email: {
+            type: Sequelize.STRING,
             unique: true
         },
         password: {
@@ -11,7 +14,6 @@ module.exports = (sequelize, Sequelize) => {
         role: {
             type: Sequelize.ENUM,
             values: ['admin', 'user'],
-            defaultValue: 'user',
         }
     });
 }

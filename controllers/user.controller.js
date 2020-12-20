@@ -1,7 +1,8 @@
 async function create (req, res) {
     return await global.db.create('user', {
-        name: req.body.name,
-        role: req.body.role,
+        email: req.body.email,
+        role: 'admin',
+        // req.body.role,
         password: require('bcrypt').hashSync(req.body.password, 10),
 
     })
