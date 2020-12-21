@@ -14,6 +14,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         category: {
             type: Sequelize.STRING,
+        },
+        CityId: {
+            type: Sequelize.STRING,
         }
     });
 }
