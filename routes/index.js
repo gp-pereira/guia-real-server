@@ -6,6 +6,7 @@ router.use('/user', require('./routers/user.router'));
 
 router.use('/city', require('./routers/city.router'));
 router.use('/company', require('./routers/company.router'));
+router.use('/message', require('./routers/message.router'));
 
 module.exports = router;
 

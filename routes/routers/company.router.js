@@ -6,10 +6,10 @@ router.get(
     companyController.getAll
 );
 
-// router.get(
-//     '/getOne',
-//     companyController.getOne
-// );
+router.get(
+    '/getOne',
+    companyController.getOne
+);
 
 router.post(
     '/create',

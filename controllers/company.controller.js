@@ -11,7 +11,7 @@ async function getAll (req, res) {
 }
 
 async function getOne (req, res) {
-    return global.db.findOne('company', { id: req.body.id })
+    return global.db.findOne('company', { id: req.query.id })
         .then(example => res.status(200).send(example)) 
         .catch(err => res.sendStatus(500)); 
 }
