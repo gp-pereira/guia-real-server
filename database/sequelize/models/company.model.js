@@ -15,6 +15,9 @@ module.exports = (sequelize, Sequelize) => {
         addressComplement: {
             type: Sequelize.STRING,
         },
+        zipCode: {
+            type: Sequelize.STRING,
+        },
         email: {
             type: Sequelize.STRING,
         },
