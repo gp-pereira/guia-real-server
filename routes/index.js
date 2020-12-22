@@ -6,11 +6,10 @@ router.use('/user', require('./routers/user.router'));
 
 router.use('/city', require('./routers/city.router'));
 router.use('/company', require('./routers/company.router'));
-<<<<<<< HEAD
 router.use('/partner', require('./routers/partner.router'));
-=======
 router.use('/message', require('./routers/message.router'));
->>>>>>> 5b816c42470109c80ba39986ec937d0bc3556bc0
+router.use('/news', require('./routers/news.router'));
+router.use('/ad', require('./routers/ad.router'));
 
 module.exports = router;
 
