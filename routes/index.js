@@ -8,6 +8,8 @@ router.use('/city', require('./routers/city.router'));
 router.use('/company', require('./routers/company.router'));
 router.use('/partner', require('./routers/partner.router'));
 router.use('/message', require('./routers/message.router'));
+router.use('/news', require('./routers/news.router'));
+router.use('/ad', require('./routers/ad.router'));
 
 module.exports = router;
 
