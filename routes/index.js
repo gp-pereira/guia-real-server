@@ -10,6 +10,7 @@ router.use('/partner', require('./routers/partner.router'));
 router.use('/message', require('./routers/message.router'));
 router.use('/news', require('./routers/news.router'));
 router.use('/ad', require('./routers/ad.router'));
+router.use('/live', require('./routers/live.router'));
 
 module.exports = router;
 

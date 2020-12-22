@@ -6,7 +6,7 @@ async function create (req, res) {
 
 async function getAll (req, res) {
     return await global.db.findAll('news')
-        .then(cities => res.status(200).send(cities)) 
+        .then(allnews => res.status(200).send(allnews)) 
         .catch(err => res.sendStatus(500)); 
 }
 
