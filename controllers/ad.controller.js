@@ -1,37 +1,46 @@
+const { readFileSync, unlinkSync } = require('fs');
+
 async function create (req, res) {
-    return await global.db.create('ad', req.body)
+    const ad = { 
+        imgUrl: req.file.path,
+        title: req.body.title, 
+        mimeType: req.file.mimetype 
+    };
+
+    return await global.db.create('ad', ad)
         .then(() => res.sendStatus(200)) 
         .catch(err => res.status(500))
 }
 
 async function getAll (req, res) {
-    return await global.db.findAll('ad')
-        .then(ads => res.status(200).send(ads)) 
-        .catch(err => res.sendStatus(500)); 
-}
+    try {
+        const ads = await global.db.findAll('ad');
+        ads.map(ad => 
+            ad.dataValues.imgBuffer = Buffer.from(readFileSync(ad.imgUrl)).toString('base64')
+        );
 
-async function getOne (req, res) {
-    return global.db.findOne('ad', { id: req.body.id })
-        .then(example => res.status(200).send(example)) 
-        .catch(err => res.sendStatus(500)); 
-}
-
-async function edit (req, res) {
-    return await global.db.update('ad', { id: req.body.id }, req.body)
-        .then(() => res.sendStatus(200)) 
-        .catch(err => res.status(500).send());
+        return res.status(200).send(ads);
+     
+    } catch { return res.sendStatus(500); } 
 }
 
 async function destroy (req, res) {
-    return await global.db.destroy('ad', req.body.id)
-        .then(() => res.sendStatus(200)) 
-        .catch(err => res.status(500));
+    try {
+        console.log('got here')
+        const ad = await global.db.findOne('ad', { id: req.body.id });
+
+        // delete the file
+        unlinkSync(ad.imgUrl);
+
+        await global.db.destroy('ad', req.body.id);
+
+        return res.sendStatus(200);
+    
+    } catch { return res.status(500); }
 }
                     
 module.exports = {
     getAll,
-    getOne,
     create,
-    edit,
     destroy,
 };

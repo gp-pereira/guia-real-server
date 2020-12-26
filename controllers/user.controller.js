@@ -1,13 +1,9 @@
 async function create (req, res) {
-    return await global.db.create('user', {
-        email: req.body.email,
-        role: 'admin',
-        // req.body.role,
-        password: require('bcrypt').hashSync(req.body.password, 10),
+    req.body.password = require('bcrypt').hashSync(req.body.password, 10);
 
-    })
+    return await global.db.create('user', req.body)
         .then(() => res.sendStatus(200)) 
-        .catch(err => res.status(500))
+        .catch(err => console.log(err))
 }
 
 async function getAll (req, res) {
@@ -23,14 +19,7 @@ async function getOne (req, res) {
 }
 
 async function edit (req, res) {
-    const props = {}
-
-    for (var prop in req.body) {
-        if (prop === 'id') continue;
-        props[prop] = req.body[prop];
-    }
-
-    return await global.db.update('user', { id: req.body.id }, props)
+    return await global.db.update('user', { id: req.body.id }, req.body)
         .then(() => res.sendStatus(200)) 
         .catch(err => res.status(500).send());
 }

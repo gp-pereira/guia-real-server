@@ -5,6 +5,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         imgUrl: {
             type: Sequelize.STRING,
+        },
+        mimeType: {
+            type: Sequelize.STRING
         }
     });
 }
