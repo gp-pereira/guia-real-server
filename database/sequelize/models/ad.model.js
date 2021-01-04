@@ -3,10 +3,10 @@ module.exports = (sequelize, Sequelize) => {
         title: {
             type: Sequelize.STRING,
         },
-        imgUrl: {
+        imgPath: {
             type: Sequelize.STRING,
         },
-        mimeType: {
+        imgMimetype: {
             type: Sequelize.STRING
         }
     });

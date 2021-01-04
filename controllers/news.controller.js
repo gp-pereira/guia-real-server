@@ -1,36 +1,70 @@
-async function create (req, res) {
-    return await global.db.create('news', req.body)
-        .then(() => res.sendStatus(200)) 
-        .catch(err => res.status(500))
-}
+const { retrieveFileAsBuffer, deleteFile } = require('../utils/fileHandlers');
 
 async function getAll (req, res) {
-    return await global.db.findAll('news')
-        .then(allnews => res.status(200).send(allnews)) 
-        .catch(err => res.sendStatus(500)); 
-}
+    try {
+        const allNews = await global.db.findAll('news');
+        allNews.forEach(
+            news => news.dataValues.imgBuffer = retrieveFileAsBuffer(news.imgPath)
+        );
+        
+        return res.status(200).send(allNews);
 
-async function getOne (req, res) {
-    return global.db.findOne('news', { id: req.body.id })
-        .then(example => res.status(200).send(example)) 
-        .catch(err => res.sendStatus(500)); 
+    } catch (err) { return res.sendStatus(500); } 
+}
+    
+// async function getOne (req, res) {
+//     return global.db.findOne('news', { id: req.body.id })
+//         .then(example => res.status(200).send(example)) 
+//         .catch(err => res.sendStatus(500)); 
+// }
+        
+async function create (req, res) {
+    const news = { 
+        title: req.body.title, 
+        content: req.body.content,
+        imgPath: req.file.path,
+        imgMimetype: req.file.mimetype 
+    };
+
+    return await global.db.create('news', news)
+        .then(() => res.sendStatus(200)) 
+        .catch(err => res.sendStatus(500))
 }
 
 async function edit (req, res) {
-    return await global.db.update('news', { id: req.body.id }, req.body)
+    const news = { 
+        title: req.body.title, 
+        content: req.body.content,
+    };
+    
+    if (req.file) {
+        news['imgPath'] = req.file.path;
+        news['imgMimetype'] = req.file.mimetype; 
+    }
+
+    console.log(news, req.body.id);
+
+    return await global.db.update('news', { id: req.body.id }, news)
         .then(() => res.sendStatus(200)) 
-        .catch(err => res.status(500).send());
+        .catch(err => res.sendStatus(500));
 }
 
 async function destroy (req, res) {
-    return await global.db.destroy('news', req.body.id)
-        .then(() => res.sendStatus(200)) 
-        .catch(err => res.status(500));
+    try {
+        const news = await global.db.findOne('news', { id: req.body.id });
+
+        deleteFile(news.imgPath);
+
+        await global.db.destroy('news', req.body.id);
+
+        return res.sendStatus(200);
+    
+    } catch { return res.sendStatus(500); }
 }
                     
 module.exports = {
     getAll,
-    getOne,
+    // getOne,
     create,
     edit,
     destroy,

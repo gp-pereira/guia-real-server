@@ -4,7 +4,13 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
         },
         content: {
-            type: Sequelize.STRING(1024),
+            type: Sequelize.STRING(4096),
         },
+        imgPath: {
+            type: Sequelize.STRING,
+        },
+        imgMimetype: {
+            type: Sequelize.STRING
+        }
     });
 }

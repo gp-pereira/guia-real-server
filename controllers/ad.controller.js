@@ -1,10 +1,10 @@
-const { readFileSync, unlinkSync } = require('fs');
+const { retrieveFileAsBuffer, deleteFile } = require('../utils/fileHandlers');
 
 async function create (req, res) {
     const ad = { 
-        imgUrl: req.file.path,
         title: req.body.title, 
-        mimeType: req.file.mimetype 
+        imgPath: req.file.path,
+        imgMimetype: req.file.mimetype 
     };
 
     return await global.db.create('ad', ad)
@@ -15,8 +15,8 @@ async function create (req, res) {
 async function getAll (req, res) {
     try {
         const ads = await global.db.findAll('ad');
-        ads.map(ad => 
-            ad.dataValues.imgBuffer = Buffer.from(readFileSync(ad.imgUrl)).toString('base64')
+        ads.forEach(
+            ad => ad.dataValues.imgBuffer = retrieveFileAsBuffer(ad.imgPath)
         );
 
         return res.status(200).send(ads);
@@ -26,11 +26,9 @@ async function getAll (req, res) {
 
 async function destroy (req, res) {
     try {
-        console.log('got here')
         const ad = await global.db.findOne('ad', { id: req.body.id });
 
-        // delete the file
-        unlinkSync(ad.imgUrl);
+        deleteFile(ad.imgPath);
 
         await global.db.destroy('ad', req.body.id);
 
@@ -38,7 +36,7 @@ async function destroy (req, res) {
     
     } catch { return res.status(500); }
 }
-                    
+              
 module.exports = {
     getAll,
     create,
