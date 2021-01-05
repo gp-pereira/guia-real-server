@@ -22,9 +22,12 @@ async function create (req, res) {
     const news = { 
         title: req.body.title, 
         content: req.body.content,
-        imgPath: req.file.path,
-        imgMimetype: req.file.mimetype 
     };
+
+    if (req.file) {
+        news['imgPath'] = req.file.path;
+        news['imgMimetype'] = req.file.mimetype; 
+    }
 
     return await global.db.create('news', news)
         .then(() => res.sendStatus(200)) 
