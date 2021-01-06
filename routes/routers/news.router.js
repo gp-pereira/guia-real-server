@@ -8,10 +8,10 @@ router.get(
     newsController.getAll
 );
     
-    // router.get(
-        //     '/getOne',
-        //     newsController.getOne
-        // );
+router.get(
+    '/getOne',
+    newsController.getOne
+);
         
 router.post(
     '/create',

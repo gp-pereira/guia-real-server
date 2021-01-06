@@ -11,12 +11,16 @@ async function getAll (req, res) {
 
     } catch (err) { return res.sendStatus(500); } 
 }
-    
-// async function getOne (req, res) {
-//     return global.db.findOne('news', { id: req.body.id })
-//         .then(example => res.status(200).send(example)) 
-//         .catch(err => res.sendStatus(500)); 
-// }
+
+async function getOne (req, res) {
+    try {
+        const news = await global.db.findOne('news', { id: req.query.id });
+        news.dataValues.imgBuffer = retrieveFileAsBuffer(news.imgPath);
+        
+        return res.status(200).send(news);
+
+    } catch (err) { return res.sendStatus(500); }
+}
         
 async function create (req, res) {
     const news = { 
@@ -67,7 +71,7 @@ async function destroy (req, res) {
                     
 module.exports = {
     getAll,
-    // getOne,
+    getOne,
     create,
     edit,
     destroy,
