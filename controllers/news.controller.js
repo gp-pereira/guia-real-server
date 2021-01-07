@@ -3,13 +3,13 @@ const { retrieveFileAsBuffer, deleteFile } = require('../utils/fileHandlers');
 async function getAll (req, res) {
     try {
         const allNews = await global.db.findAll('news');
-        allNews.forEach(
-            news => news.dataValues.imgBuffer = retrieveFileAsBuffer(news.imgPath)
-        );
+        allNews.forEach(news => {
+            if (news.imgPath) news.dataValues.imgBuffer = retrieveFileAsBuffer(news.imgPath)
+        });
         
         return res.status(200).send(allNews);
 
-    } catch (err) { return res.sendStatus(500); } 
+    } catch (err) { console.log(err); return res.sendStatus(500); } 
 }
     
 // async function getOne (req, res) {
