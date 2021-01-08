@@ -6,6 +6,12 @@ router.get(
     companyController.getAll
 );
 
+router.get(
+    '/getAllByCity',
+    companyController.getAllByCity
+);
+
+
 // router.get(
 //     '/getOne',
 //     companyController.getOne

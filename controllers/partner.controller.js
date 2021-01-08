@@ -10,6 +10,12 @@ async function getAll (req, res) {
         .catch(err => res.sendStatus(500)); 
 }
 
+async function getAllByCity (req, res) {
+    return await global.db.findAll('partner', { CityId: req.query.id })
+        .then(partners => res.status(200).send(partners)) 
+        .catch(err => {console.log(err); res.sendStatus(500)}); 
+}
+
 async function getOne (req, res) {
     return global.db.findOne('partner', { id: req.body.id })
         .then(example => res.status(200).send(example)) 
@@ -30,6 +36,7 @@ async function destroy (req, res) {
                     
 module.exports = {
     getAll,
+    getAllByCity,
     getOne,
     create,
     edit,
