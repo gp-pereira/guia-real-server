@@ -6,10 +6,10 @@ router.get(
     cityController.getAll
 );
 
-// router.get(
-//     '/getOne',
-//     cityController.getOne
-// );
+router.get(
+    '/getOne',
+    cityController.getOne
+);
 
 router.post(
     '/create',
