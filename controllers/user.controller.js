@@ -29,6 +29,23 @@ async function destroy (req, res) {
         .then(() => res.sendStatus(200)) 
         .catch(err => res.status(500));
 }
+
+const bcrypt = require('bcrypt');
+
+async function changePassword (req, res) {
+    try {
+        const user = await global.db.findOne('user', { id: req.body.id });
+
+        if (!bcrypt.compareSync(req.body.oldPassword, user.getDataValue('password')))
+            return res.sendStatus(401);
+            
+        user.password = bcrypt.hashSync(req.body.newPassword, 10);
+        await user.save();
+
+        return res.sendStatus(200);
+
+    } catch { return res.sendStatus(500); }
+}
                     
 module.exports = {
     getAll,
@@ -36,4 +53,5 @@ module.exports = {
     create,
     edit,
     destroy,
+    changePassword
 };

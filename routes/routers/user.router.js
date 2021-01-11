@@ -26,4 +26,9 @@ router.post(
     userController.destroy
 );
 
+router.post(
+    '/changePassword',
+    userController.changePassword
+)
+
 module.exports = router;
