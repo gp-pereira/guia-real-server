@@ -3,6 +3,9 @@ module.exports = (sequelize, Sequelize) => {
         title: {
             type: Sequelize.STRING,
         },
+        subtitle: {
+            type: Sequelize.STRING,
+        },
         content: {
             type: Sequelize.STRING(4096),
         },
@@ -11,6 +14,12 @@ module.exports = (sequelize, Sequelize) => {
         },
         imgMimetype: {
             type: Sequelize.STRING
-        }
+        },
+        imgDescription: {
+            type: Sequelize.STRING,
+        },
+        author: {
+            type: Sequelize.STRING,
+        },
     });
 }
