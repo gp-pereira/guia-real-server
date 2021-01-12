@@ -44,6 +44,12 @@ class DatabaseInterface {
         this.models.company.hasMany(this.models.message);
         this.models.message.belongsTo(this.models.company);
 
+        // await this.models.user.create({
+        //     email: "pereira7346@gmail.com",
+        //     password: require('bcrypt').hashSync("coxinha12", 10),
+        //     role: "admin"
+        // })
+
         // uncomment the next line to sync the db
         await this.sequelize.sync({ alter: true }); console.log('Sync done.');
     }
