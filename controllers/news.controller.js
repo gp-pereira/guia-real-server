@@ -26,6 +26,9 @@ async function create (req, res) {
     const news = { 
         title: req.body.title, 
         content: req.body.content,
+        subtitle: req.body.subtitle,
+        author: req.body.author,
+        imgDescription: req.body.imgDescription,
     };
 
     if (req.file) {
@@ -42,6 +45,9 @@ async function edit (req, res) {
     const news = { 
         title: req.body.title, 
         content: req.body.content,
+        subtitle: req.body.subtitle,
+        author: req.body.author,
+        imgDescription: req.body.imgDescription,
     };
     
     if (req.file) {
