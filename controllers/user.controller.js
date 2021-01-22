@@ -1,6 +1,9 @@
 async function create (req, res) {
     req.body.password = require('bcrypt').hashSync(req.body.password, 10);
 
+    const user = await global.db.findOne('user', { email: req.body.email });
+    if (user) return res.sendStatus(409);
+
     return await global.db.create('user', req.body)
         .then(() => res.sendStatus(200)) 
         .catch(err => console.log(err))
