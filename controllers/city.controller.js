@@ -1,3 +1,5 @@
+const { TestScheduler } = require("jest");
+
 async function create (req, res) {
     return await global.db.create('city', req.body)
         .then(() => res.sendStatus(200)) 
@@ -23,9 +25,20 @@ async function edit (req, res) {
 }
 
 async function destroy (req, res) {
-    return await global.db.destroy('city', req.body.id)
-        .then(() => res.sendStatus(200)) 
-        .catch(err => res.status(500));
+    try {
+        const city = await global.db.findOne('city', { id: req.body.id });
+
+        const companies = await city.getCompanies();
+        const partners = await city.getPartners();
+
+        if (companies.length > 0 || partners.length > 0) 
+            return res.status(409).send({ companies, partners });
+
+        await city.destroy();
+
+        return res.sendStatus(200);
+
+    } catch (err) { console.log(err); return res.status(500); }
 }
                     
 module.exports = {
