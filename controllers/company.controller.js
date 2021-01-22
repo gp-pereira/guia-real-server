@@ -23,9 +23,24 @@ async function edit (req, res) {
 }
 
 async function destroy (req, res) {
-    return await global.db.destroy('company', req.body.id)
-        .then(() => res.sendStatus(200)) 
-        .catch(err => res.status(500));
+    try {
+        const company = await global.db.findOne('company', { id: req.body.id });
+
+        const users = await company.getUsers();
+
+        if (users.length > 0)
+            return res.status(409).send({ users });
+
+        const messages = await company.getMessages();
+
+        for (let i=0; i<messages.length; i++)
+            await global.db.destroy('message'. messages[i].id);
+
+        await company.destroy();
+
+        return res.sendStatus(200);
+
+    } catch (err) { console.log(err); return res.status(500); }
 }
                     
 module.exports = {
