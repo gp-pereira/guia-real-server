@@ -34,7 +34,7 @@ async function destroy (req, res) {
         const messages = await company.getMessages();
 
         for (let i=0; i<messages.length; i++)
-            await global.db.destroy('message'. messages[i].id);
+            await global.db.destroy('message', messages[i].id);
 
         await company.destroy();
 
